@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title>Timestamp Microservice</title>
+        <meta charset = "UTF-8" />
+        <meta name = "viewport" content = "width=device-width, initial-scale=1" />
+        
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                font-family: verdana;
+                font-size: 15px;
+            }
+            
+            body {
+                background-color: #E1F5FE;
+            }
+            
+            header {
+                text-align: center;
+                font-style: none;
+                margin-top: 25px;
+            }
+            
+            header label {
+                font-size: 48px;
+            }
+            
+            .flex-container {
+                width: 80%;
+                height: 120px;
+                min-width: 296.5px;
+                max-width: 1080px;
+                margin: auto;
+                display: flex;
+                justify-content: space-around;
+                margin-top: 25px;
+            }
+            
+            @media screen and (max-width: 750px) {
+                
+                header label {
+                    font-size: 36px;
+                }
+                
+                .flex-container {
+                    width: 60%;
+                    min-width: 296.5px;
+                    height: 260px;
+                    margin: auto;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    margin-top: 25px;
+                }
+            }
+            
+            .container {
+                text-align: left;
+                width: 296.5px;
+                min-width: 296.5px;
+                height: 120px;
+                margin: 0px auto;
+                display: flex;
+                flex-direction: column;
+            }
+            
+             .container-label {
+                font-weight: bold;
+                text-align: center;
+            }
+            
+            .response-example {
+                background: #81D4FA;
+                color: #01579B;
+                width: 100%;
+                border-radius: 2px;
+            }
+            
+            .txt {
+                border: 1px solid #A0A0A0;
+                border-radius: 2px;
+                outline: none;
+                padding: 4px 6px;
+            }
+            
+            .btn {
+                padding: 4px 6px;
+                width: 75px;
+                border-radius: 2px;
+                border: none;
+                background: #0f9d58;
+                color: white;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.22);
+                
+            }
+            
+            .radio-group {
+                display: flex;
+                justify-content: space-around;
+            }
+        </style>
+        
+    </head>
+    
+    <body>
+        <header>
+            <label>Timestamp Microservice</label>
+        </header>
+        <main>
+            <div class = "flex-container">
+                <div class = "container">
+                    <div class = "container-label">
+                        <label>Request</label>
+                    </div>
+                    <div style = "margin: 10px 0px">
+                        <label id = "lbl-url">Natural Date URL:</label><br />
+                        <input id = "txt-url" class = "txt" type = "text" readonly />
+                        <button id = "btn-copy" class = "btn">Copy</button>
+                    </div>
+                    <div class = radio-group>
+                        <div><input id = "rdo-natural" type = "radio" style = "" checked> Natural Date</input></div>
+                        <div><input id = "rdo-unix" type = "radio" style = ""></input> Unix Time</div>
+                    </div>
+                </div>
+                <div class = "container">
+                    <div class = "container-label">
+                        <label>Response</label>
+                    </div>
+                    <div style = "margin: 10px 0px">
+                        <p class = "response-example">
+                            &nbsp;{<br />
+                            &nbsp;&nbsp;&nbsp;"natural": "December 15, 2015",<br />
+                            &nbsp;&nbsp;&nbsp;"unix": "1450137600"<br />
+                            &nbsp;}
+                        </p>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <script type = "text/javascript">
+            let url = (window.location.href).substring(0, window.location.href.length - 1);
+            const naturalDateRoute = "December%2015,%202015";
+            const unixTimeRoute = "1450137600";
+            const lblUrl = document.getElementById("lbl-url");
+            const btnCopy = document.getElementById("btn-copy");
+            const rdoNatural = document.getElementById("rdo-natural");
+            const rdoUnix = document.getElementById("rdo-unix");
+            const txtUrl = document.getElementById("txt-url");
+            txtUrl.value = url + naturalDateRoute;
+            
+            btnCopy.addEventListener("click", () => {
+                txtUrl.select();
+                document.execCommand('copy');
+            });
+            
+            rdoNatural.addEventListener("click", () =>  {
+                lblUrl.innerHTML = "Natural Date URL:"
+                txtUrl.value = url + naturalDateRoute;
+                rdoUnix.checked = false;
+            });
+            
+            rdoUnix.addEventListener("click", () => {
+                lblUrl.innerHTML = "Unix Time URL:";
+                txtUrl.value = url + unixTimeRoute;
+                rdoNatural.checked = false;
+            });
+            
+        </script>
+    </body>
+</html>
