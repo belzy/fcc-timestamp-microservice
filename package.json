@@ -4,11 +4,13 @@
   "description": "Building the Timestamp Microservice app from freeCodeCamp.com",
   "main": "index.js",
   "scripts": {
+	"start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brandon G. Elzy",
   "license": "ISC",
   "dependencies": {
+    "heroku": "^0.2.0",
     "nodemon": "^1.12.1",
     "unix-timestamp": "^0.2.0"
   }
